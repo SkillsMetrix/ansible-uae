@@ -1,0 +1,12 @@
+- name: check the background
+  debug:
+    msg: "OS: {{ansible_os_family}}, RAM :{{ansible_memtotal_mb}}: MB"
+
+- name: install packages only when RAM is bigger
+  apt:
+    state: present
+    update_cache: yes
+  loop: "{{debian_packages}}"
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_memtotal_mb >= min_required_mb

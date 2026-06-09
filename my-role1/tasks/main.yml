@@ -1,0 +1,7 @@
+
+- import_tasks: subtask.yaml
+
+- name: create an app
+  apt:
+    name: apache2
+  when: install_apache_flag
